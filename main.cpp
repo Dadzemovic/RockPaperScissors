@@ -10,6 +10,8 @@ int main()
     // Initialize variables
     int randomInt, userMove;
     char playAgain;
+    int playerWins = 0;
+    int compWins = 0;
 
     const string moves[] = {"rock", "paper", "scissors"};
 
@@ -30,7 +32,7 @@ int main()
         cin >> userMove;
 
         if(userMove != 1 and userMove !=2 and userMove !=3)
-            playing = false;
+            cout << "Unknown command! Please try that again..." << endl;
         else
         {
             if(userMove == randomInt)
@@ -38,12 +40,19 @@ int main()
             else
             {
                 if(userMove - randomInt == 1 or userMove - randomInt == -2)
+                {
                     cout << "Congratulations, you won!" << endl;
-                else
+                    playerWins++;
+                } else
+                {
                     cout << "Sorry, better luck next time!" << endl;
+                    compWins++;
+                }
 
                 cout << "You chose " << moves[userMove - 1] << " and the computer chose " << moves[randomInt - 1] << endl;
             }
+
+            cout << "(Player: " << playerWins << " | Computer: " << compWins << ")" << endl;
 
             cout << "Play again? [y/n]: ";
             cin >> playAgain;
