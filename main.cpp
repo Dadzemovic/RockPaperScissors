@@ -25,9 +25,6 @@ int main()
 
     while(playing)
     {
-        // Create random integer in range [1,3] to simulate the 'computer' selecting a move
-        randomInt = rand() % 3 + 1;
-
         cout << "Enter 1 to play Rock, 2 to play Paper, and 3 to play Scissors!: ";
         cin >> userMove;
 
@@ -35,6 +32,9 @@ int main()
             cout << "Unknown command! Please try that again..." << endl;
         else
         {
+            // Create random integer in range [1,3] to simulate the 'computer' selecting a move
+            randomInt = rand() % 3 + 1;
+
             if(userMove == randomInt)
                 cout << "Tie game! Both you and the computer chose " << moves[randomInt - 1] << endl;
             else
