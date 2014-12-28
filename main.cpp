@@ -1,6 +1,7 @@
-#include <iostream>     /* cin, cout */
+#include <iostream>
+#include <string>
 #include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
+#include <time.h>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ int main()
 {
     // Initialize variables
     int randomInt, userMove;
+    char playAgain;
 
     const string moves[] = {"rock", "paper", "scissors"};
 
@@ -24,7 +26,7 @@ int main()
         // Create random integer in range [1,3] to simulate the 'computer' selecting a move
         randomInt = rand() % 3 + 1;
 
-        cout << "Enter 1 to play Rock, 2 to play Paper, and 3 to play Scissors!" << endl;
+        cout << "Enter 1 to play Rock, 2 to play Paper, and 3 to play Scissors!: ";
         cin >> userMove;
 
         if(userMove != 1 and userMove !=2 and userMove !=3)
@@ -43,7 +45,11 @@ int main()
                 cout << "You chose " << moves[userMove - 1] << " and the computer chose " << moves[randomInt - 1] << endl;
             }
 
-            playing = false;
+            cout << "Play again? [y/n]: ";
+            cin >> playAgain;
+
+            if(playAgain != 'y')
+                playing = false;
         }
 
     }
