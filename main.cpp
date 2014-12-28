@@ -36,7 +36,7 @@ int main()
             randomInt = rand() % 3 + 1;
 
             if(userMove == randomInt)
-                cout << "Tie game! Both you and the computer chose " << moves[randomInt - 1] << endl;
+                cout << "Tie game!\nBoth you and the computer chose " << moves[randomInt - 1] << endl;
             else
             {
                 if(userMove - randomInt == 1 or userMove - randomInt == -2)
