@@ -2,8 +2,16 @@
 #include <string>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>
+#include <limits>       /* numeric_limits */
 
 using namespace std;
+
+// Empties the input stream
+void clearStream()
+{
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
 
 int main()
 {
@@ -21,18 +29,21 @@ int main()
     bool playing = true;
 
     cout << "Welcome. Please press the enter key to begin playing Rock Paper Scissors SHOOT!";
-    cin.get(); // "Pauses" the program until the enter key is pressed
+    clearStream(); // Pauses the program until the enter key is pressed and simultaneously clears the input stream if the user input anything before hitting enter
 
     while(playing)
     {
         cout << "Enter 1 to play Rock, 2 to play Paper, and 3 to play Scissors!: ";
         cin >> userMove;
 
-        if(userMove != 1 and userMove !=2 and userMove !=3)
+        if(!cin or (userMove != 1 and userMove !=2 and userMove != 3))
+        {
             cout << "Unknown command! Please try that again..." << endl;
+            clearStream();
+        }
         else
         {
-            // Create random integer in range [1,3] to simulate the 'computer' selecting a move
+            // Create random integer in range [1,3] to simulate the computer selecting a move
             randomInt = rand() % 3 + 1;
 
             if(userMove == randomInt)
@@ -57,7 +68,7 @@ int main()
             cout << "Play again? [y/n]: ";
             cin >> playAgain;
 
-            if(playAgain != 'y')
+            if(!cin or playAgain != 'y')
                 playing = false;
         }
 
