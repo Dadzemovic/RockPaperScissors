@@ -3,7 +3,6 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>
 #include <limits>       /* numeric_limits */
-#include <stdlib.h>     /* exit, EXIT_SUCCESS */
 
 int main()
 {
