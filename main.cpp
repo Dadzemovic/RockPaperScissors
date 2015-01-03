@@ -9,22 +9,20 @@ int main()
 {
     bool playing = true;
     std::string playAgain, line;
-    int playerWins = 0, compWins = 0, compMove, userMove;
+    int playerWins = 0, compWins = 0, compMove, userMove, result;
     const std::string moves[] = {"rock", "paper", "scissors"};
 
     // Initialize rng
     srand(time(NULL));
 
-    std::cout << "Welcome. Please press the enter key to begin playing Rock Paper Scissors!";
-    // Pauses the program
-    getline(std::cin, line);
+    std::cout << "Welcome!" << std::endl;
 
     while(playing)
     {
         std::cout << "Enter 1 to play Rock, 2 to play Paper, and 3 to play Scissors!: ";
         std::cin >> userMove;
 
-        while(!(std::cin and userMove >= 1 and userMove <= 3))
+        while(!(std::cin && userMove >= 1 && userMove <= 3))
         {
             std::cout << "Unknown command! Please try that again..." << std::endl;
             std::cin.clear();
@@ -33,36 +31,39 @@ int main()
             std::cin >> userMove;
         }
 
+        // Clear input stream in the case that userMove variable is truncated due to the input of a double (everything including and past the decimal point would be left in the input stream)
+        if(std::cin.peek() != EOF && std::cin.peek() != '\n')
+        {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
         // Create random integer in range [1,3] to simulate the computer selecting a move
         compMove = rand() % 3 + 1;
 
-        if(userMove == compMove)
-            std::cout << "Tie game!\nBoth you and the computer chose " << moves[compMove - 1] << std::endl;
-        else
-        {
-            if(userMove - compMove == 1 or userMove - compMove == -2)
-            {
-                std::cout << "Congratulations, you won!" << std::endl;
-                playerWins++;
-            } else
-            {
-                std::cout << "Sorry, better luck next time!" << std::endl;
-                compWins++;
-            }
+        result = userMove - compMove;
 
-            std::cout << "You chose " << moves[userMove - 1] << " and the computer chose " << moves[compMove - 1] << std::endl;
+        if(result == 0)
+            std::cout << "Tie game!" << std::endl;
+        else if(result == 1 || result == -2)
+        {    
+            std::cout << "Congratulations, you won!" << std::endl;
+            playerWins++;
+        } else
+        {
+            std::cout << "Sorry, you lost!" << std::endl;
+            compWins++;
         }
 
+        std::cout << "Your move: " << moves[userMove - 1] << " // Computer's move: " << moves[compMove - 1] << std::endl;
         std::cout << "(Player: " << playerWins << " | Computer: " << compWins << ")" << std::endl;
-
-
         std::cout << "Play again? [y/n]: ";
         std::cin >> playAgain;
         
-        while(!(std::cin and playAgain == "y" or playAgain == "n"))
+        while(!(std::cin && (playAgain == "y" || playAgain == "n")))
         {
             std::cout << "Unknown command! Please try that again..." << std::endl;
-
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Play again? [y/n]: ";
             std::cin >> playAgain;      
         }
