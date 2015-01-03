@@ -31,8 +31,8 @@ int main()
             std::cin >> userMove;
         }
 
-        // Clear input stream in the case that userMove variable is truncated due to the input of a double (everything including and past the decimal point would be left in the input stream)
-        if(std::cin.peek() != EOF && std::cin.peek() != '\n')
+        // Clears input stream if double was input to userMove and decimal values are left in the input stream due to truncation
+        if(std::cin.peek() != '\n')
         {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
