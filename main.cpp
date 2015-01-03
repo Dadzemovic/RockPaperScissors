@@ -7,7 +7,7 @@
 int main()
 {
     bool playing = true;
-    std::string playAgain, line;
+    std::string playAgain;
     int playerWins = 0, compWins = 0, compMove, userMove, result;
     const std::string moves[] = {"rock", "paper", "scissors"};
 
