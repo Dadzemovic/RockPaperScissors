@@ -6,7 +6,7 @@
 int main()
 {
     bool playing = true;
-    std::string playAgain;
+    std::string userMoveStr, playAgain;
     int playerWins = 0, compWins = 0, compMove, userMove, result;
     const std::string moves[] = {"rock", "paper", "scissors"};
 
@@ -20,22 +20,17 @@ int main()
     while(playing)
     {
         std::cout << "Enter 1 to play Rock, 2 to play Paper, and 3 to play Scissors!: ";
-        std::cin >> userMove;
+        getline(std::cin, userMoveStr);
 
-        while(!(std::cin && userMove >= 1 && userMove <= 3))
+        while(!(userMoveStr == "1" || userMoveStr == "2" || userMoveStr == "3"))
         {
             std::cout << "Unknown command! Please try that again..." << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter 1 to play Rock, 2 to play Paper, and 3 to play Scissors!: ";
-            std::cin >> userMove;
+            getline(std::cin, userMoveStr);
         }
 
-        // Clears input stream if double was input to userMove and decimal values are left in the input stream due to truncation
-        if(std::cin.peek() != '\n')
-        {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
+        // Convert the user move from a string to an integer
+        userMove = std::stoi(userMoveStr);
 
         // Create random integer in range [1,3] to simulate the computer selecting a move
         compMove = distr(eng);
@@ -57,18 +52,16 @@ int main()
         std::cout << "Your move: " << moves[userMove - 1] << " // Computer's move: " << moves[compMove - 1] << std::endl;
         std::cout << "(Player: " << playerWins << " | Computer: " << compWins << ")" << std::endl;
         std::cout << "Play again? [y/n]: ";
-        std::cin >> playAgain;
+        getline(std::cin, playAgain);
         
-        while(!(std::cin && (playAgain == "y" || playAgain == "n")))
+        while(!(playAgain == "y" || playAgain == "n"))
         {
             std::cout << "Unknown command! Please try that again..." << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Play again? [y/n]: ";
-            std::cin >> playAgain;      
+            getline(std::cin, playAgain);      
         }
 
-        if(playAgain != "y")
+        if(playAgain == "n")
             playing = false;
     }
 
