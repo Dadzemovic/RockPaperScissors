@@ -2,13 +2,15 @@
 #include <string>
 #include <limits>       /* numeric_limits */
 #include <random>
+#include <unordered_map>
 
 int main()
 {
     bool playing = true;
     std::string userMoveStr, playAgain;
     int playerWins = 0, compWins = 0, compMove, userMove, result;
-    const std::string moves[] = {"rock", "paper", "scissors"};
+    typedef std::unordered_map<int, std::string> moveMap;
+    moveMap moves = { {1, "Rock"}, {2, "Paper"}, {3, "Scissors"} };
 
     // Initialize random number generator
     std::random_device rd; // obtain a random number from hardware
@@ -49,7 +51,7 @@ int main()
             compWins++;
         }
 
-        std::cout << "Your move: " << moves[userMove - 1] << " // Computer's move: " << moves[compMove - 1] << std::endl;
+        std::cout << "Your move: " << moves[userMove] << " // Computer's move: " << moves[compMove] << std::endl;
         std::cout << "(Player: " << playerWins << " | Computer: " << compWins << ")" << std::endl;
         std::cout << "Play again? [y/n]: ";
         getline(std::cin, playAgain);
