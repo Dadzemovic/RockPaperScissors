@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>
 #include <limits>       /* numeric_limits */
+#include <random>
 
 int main()
 {
@@ -11,8 +10,10 @@ int main()
     int playerWins = 0, compWins = 0, compMove, userMove, result;
     const std::string moves[] = {"rock", "paper", "scissors"};
 
-    // Initialize rng
-    srand(time(NULL));
+    // Initialize random number generator
+    std::random_device rd; // obtain a random number from hardware
+    std::mt19937 eng(rd()); // seed the generator
+    std::uniform_int_distribution<> distr(1, 3); // define the range
 
     std::cout << "Welcome!" << std::endl;
 
@@ -37,7 +38,7 @@ int main()
         }
 
         // Create random integer in range [1,3] to simulate the computer selecting a move
-        compMove = rand() % 3 + 1;
+        compMove = distr(eng);
 
         result = userMove - compMove;
 
