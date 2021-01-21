@@ -50,7 +50,7 @@ int main()
             compWins++;
         }
 
-        std::cout << "Your move: " << moves[userMove] << " // Computer's move: " << moves[compMove] << std::endl;
+        std::cout << "Yourxxx move: " << moves[userMove] << " // Computer's move: " << moves[compMove] << std::endl;
         std::cout << "(Player: " << playerWins << " | Computer: " << compWins << ")" << std::endl;
         std::cout << "Play again? [y/n]: ";
         getline(std::cin, playAgain);
